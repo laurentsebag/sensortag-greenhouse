@@ -1,0 +1,28 @@
+{
+  "name": "greenhouse",
+  "version": "0.0.1",
+  "description": "Temperature and weather monitoring for greenhouses using Ti's SensorTag.",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/laurentsebag/greenhouse"
+  },
+  "keywords": [
+    "nodejs",
+    "sensortag",
+    "weather",
+    "temperature",
+    "greenhouse",
+    "charts"
+  ],
+  "author": "Laurent Sebag",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.12.3",
+    "mongoose": "^3.8.25",
+    "sensortag": "git://github.com/sandeepmistry/node-sensortag"
+  }
+}

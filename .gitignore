@@ -1,0 +1,4 @@
+# Ignore vim recovery files
+*.swp
+
+node_modules/
