@@ -1,0 +1,22 @@
+{
+  "name": "node-sensortag",
+  "main": "index.js",
+  "version": "0.1.11",
+  "homepage": "https://github.com/sandeepmistry/node-sensortag",
+  "authors": [
+    "Laurent Sebag <laurent.sebag@bskyb.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "chartjs": "~1.0.2",
+    "jquery": "~2.1.3"
+  }
+}
