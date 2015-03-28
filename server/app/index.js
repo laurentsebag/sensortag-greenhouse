@@ -1,6 +1,5 @@
 var util = require('util'),
   async = require('async'),
-  sensortag = require('sensortag'),
   express = require('express'),
   config = require('./config'),
   app = express(),

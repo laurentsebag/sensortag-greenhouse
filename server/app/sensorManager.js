@@ -1,4 +1,4 @@
-var sensortag = require('sensorTag'),
+var sensortag = require('sensortag'),
   async = require('async'),
   config = require('./config'),
   SENSOR_SETUP_DELAY = config.SENSOR_SETUP_DELAY,

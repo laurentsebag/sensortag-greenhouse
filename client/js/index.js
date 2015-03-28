@@ -3,7 +3,8 @@
   document.onready = function () {
     console.log("hello world");
 
-    Chart.defaults.global.responsive = false;
+    Chart.defaults.global.responsive = true;
+    Chart.defaults.global.animation = false;
 
     var convertData = function (inData) {
       var outData = {
