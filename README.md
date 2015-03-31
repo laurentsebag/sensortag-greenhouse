@@ -1,5 +1,5 @@
-Lighthouse
-==========
+Greenhouse
+=======
 
 Teperature and weather monitoring for greenhouses using Ti's SensorTag.
 
