@@ -8,7 +8,7 @@ var sensortag = require('sensortag'),
 var connect = function (onConnection, onDisconnection, onNewReading) {
   var connected = false,
     readSensor = function (sensorTag) {
-      var reading = {};
+      var readings = {};
       console.log("reading sensortag...");
       async.series([
         function(callback) {
@@ -25,11 +25,11 @@ var connect = function (onConnection, onDisconnection, onNewReading) {
             var temperature = ambientTemperature.toFixed(1);
             console.log('\t\tobject temperature = %d °C', irTemperature);
             console.log('\t\tambient temperature = %d °C', temperature);
-            reading.irTemperature = {
+            readings[Reading.TYPE_TEMP_IR] = {
               date: new Date(),
               value: irTemperature
             };
-            reading.ambientTemperature = {
+            readings[Reading.TYPE_TEMP_AMBIENT] = {
               date: new Date(),
               value: temperature
             };
@@ -53,7 +53,7 @@ var connect = function (onConnection, onDisconnection, onNewReading) {
             console.log('\t\ttemperature = %d °C', temperature.toFixed(1));
             console.log('\t\thumidity = %d %', humidity.toFixed(1));
 
-            reading.humidity = {
+            readings[Reading.TYPE_HUMIDITY] = {
               date: new Date(),
               value: humidity
             };
@@ -75,7 +75,7 @@ var connect = function (onConnection, onDisconnection, onNewReading) {
           console.log('\treadBarometricPressure');
           sensorTag.readBarometricPressure(function(error, pressure) {
             console.log('\t\tpressure = %d mBar', pressure.toFixed(1));
-            reading.pressure = {
+            readings[Reading.TYPE_PRESSURE] = {
               date: new Date(),
               value: pressure.toFixed(1)
             };
@@ -100,7 +100,7 @@ var connect = function (onConnection, onDisconnection, onNewReading) {
                 console.log('\treadLuxometer');
                 sensorTag.readLuxometer(function(error, lux) {
                   console.log('\tlux = %d', lux.toFixed(1));
-                  reading.luminosity = {
+                  readings[Reading.TYPE_LUMINOSITY] = {
                     date: new Date(),
                     value: lux.toFixed(1)
                   };
@@ -112,7 +112,7 @@ var connect = function (onConnection, onDisconnection, onNewReading) {
                 sensorTag.disableLuxometer(callback);
               },
               function() {
-                onNewReading(reading);
+                onNewReading(readings);
                 callback();
               }
             ]);
