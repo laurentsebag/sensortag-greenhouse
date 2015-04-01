@@ -5,11 +5,16 @@ var util = require('util'),
   config = require('./config'),
   app = express(),
   sensorManager = require('./sensorManager'),
-  readingController = require('./controllers/reading'),
+  readingController,
   server,
   db = mongoose.connection;
 
 var EXIT_DB_ERROR = 1;
+
+// Setup models
+require('./models/reading');
+
+readingController = require('./controllers/reading');
 
 // Setup routes
 require('./routes/reading')(app);

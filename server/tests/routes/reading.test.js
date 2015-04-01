@@ -13,13 +13,19 @@ describe('Unit test', function () {
           .end(function (err, res) {
             should.not.exist(err);
             should.exist(res.body);
-            res.body.should.have.property('irTemperature');
-            res.body.should.have.property('ambientTemperature');
+            res.body.should.have.property('temp_ir');
+            res.body.should.have.property('temp_ambient');
             res.body.should.have.property('humidity');
             res.body.should.have.property('pressure');
             res.body.should.have.property('luminosity');
             done();
           });
+      });
+      it('should return 403 if no data since modified-since header date', function (done) {
+        request(app)
+          .get(PATH)
+          .set('If-Modified-Since', new Date().toGMTString())
+          .expect(304, done);
       });
     });
   });

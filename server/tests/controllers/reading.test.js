@@ -24,14 +24,24 @@ describe('Unit test', function () {
     });
     describe('Method getAllReadings', function () {
       it('should return all the readings', function (done) {
-        controller.getAllReadings(function (err, readings) {
+        controller.getAllReadings(null, function (err, readings) {
           should.not.exist(err);
           should.exist(readings);
-          readings.should.have.property('ambientTemperature').length(0);
-          readings.should.have.property('irTemperature').length(0);
-          readings.should.have.property('luminosity').length(0);
-          readings.should.have.property('pressure').length(0);
-          readings.should.have.property('humidity').length(1);
+          readings.should.have.property(Reading.TYPE_TEMP_AMBIENT).length(0);
+          readings.should.have.property(Reading.TYPE_TEMP_IR).length(0);
+          readings.should.have.property(Reading.TYPE_LUMINOSITY).length(0);
+          readings.should.have.property(Reading.TYPE_PRESSURE).length(0);
+          readings.should.have.property(Reading.TYPE_HUMIDITY).length(1);
+          var humidity = readings[Reading.TYPE_HUMIDITY][0];
+          humidity.should.not.have.property('type');
+          humidity.should.not.have.property('_id');
+          done();
+        });
+      });
+      it('should return null if there are no new readings since `since`', function (done) {
+        controller.getAllReadings({since: new Date()}, function (err, readings) {
+          should.not.exist(err);
+          should.equal(readings, null);
           done();
         });
       });
@@ -62,14 +72,14 @@ describe('Unit test', function () {
       it('should add readings to the model', function (done) {
         controller.addReadings(readings, function (err) {
           should.not.exist(err);
-          controller.getAllReadings(function (err, readings) {
+          controller.getAllReadings(null, function (err, readings) {
             should.not.exist(err);
             should.exist(readings);
-            readings.should.have.property('ambientTemperature').length(1);
-            readings.should.have.property('irTemperature').length(1);
-            readings.should.have.property('humidity').length(2);
-            readings.should.have.property('pressure').length(1);
-            readings.should.have.property('luminosity').length(1);
+            readings.should.have.property(Reading.TYPE_TEMP_AMBIENT).length(1);
+            readings.should.have.property(Reading.TYPE_TEMP_IR).length(1);
+            readings.should.have.property(Reading.TYPE_HUMIDITY).length(2);
+            readings.should.have.property(Reading.TYPE_PRESSURE).length(1);
+            readings.should.have.property(Reading.TYPE_LUMINOSITY).length(1);
             done();
           });
         });

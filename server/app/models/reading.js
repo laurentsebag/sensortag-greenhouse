@@ -32,7 +32,9 @@ readingSchema.statics = {
   TYPE_LUMINOSITY: readingTypes[1],
   TYPE_PRESSURE: readingTypes[2],
   TYPE_TEMP_AMBIENT: readingTypes[3],
-  TYPE_TEMP_IR: readingTypes[4]
+  TYPE_TEMP_IR: readingTypes[4],
+
+  PUBLIC_SELECTION: '-_id date value'
 };
 
 readingSchema.methods.promiseSave = function () {
